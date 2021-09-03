@@ -81,11 +81,18 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $result = $user->save();
+//         $user = User::find($id);
+//         $user->name = $request->name;
+//         $user->email = $request->email;
+//         $user->password = $request->password;
+//         $result = $user->save();
+
+        $result = User::Where('id',$id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
+
         if($result){
             return ["result"=>"User Updated successfully"];
         }else{
